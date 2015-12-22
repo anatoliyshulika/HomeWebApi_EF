@@ -11,14 +11,16 @@ namespace HomeWebApi
     {
         private DeviceContext db = new DeviceContext();
         Frige frige;
+       // Lamp lamp;
+        List<Lamp> lampList;
         // GET: Friges
-        public ActionResult FrigeView()
+        public ActionResult FrigeView(Frige Frige)
         {
-            List<Frige> lf = new List<Frige>();
-            lf = db.Friges.ToList();
-            int id = lf.Count;
-            frige = new Frige();
+            int id = Frige.Id;
             frige = db.Friges.Find(id);
+            lampList = frige.Lamps;
+            frige = Frige;
+            frige.Lamps = lampList;
             return View(frige);
         }
     }

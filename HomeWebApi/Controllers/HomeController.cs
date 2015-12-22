@@ -124,7 +124,7 @@ namespace HomeWebApi
                     Bake bake = new Bake { ViewPath = bakeViewPath, Name = modelName, Burners = burnerList, Ovens = ovenList, CreateTime = DateTime.Now.ToLongTimeString() };
                     DeviceDb.Entry(bake).State = EntityState.Added;
                     DeviceDb.SaveChanges();
-                    return RedirectToAction("BakeView", "Bakes");
+                    return RedirectToAction("BakeView", "Bakes", bake);
                 case "Frige":
                     lampFrigeList = new List<Lamp>();
                     Lamp lampFrige = new Lamp { ViewPath = "no", Name = "LampFrige1", State = false };
@@ -133,7 +133,7 @@ namespace HomeWebApi
                     Frige frige = new Frige { ViewPath = frigeViewPath, Name = modelName, State = false, FrigeLevel = SetLevel.Low, Lamps = lampFrigeList, CreateTime = DateTime.Now.ToLongTimeString() };
                     DeviceDb.Entry(frige).State = EntityState.Added;
                     DeviceDb.SaveChanges();
-                    return RedirectToAction("FrigeView", "Friges");
+                    return RedirectToAction("FrigeView", "Friges", frige);
             case "TV":
                     TV tv = new TV { ViewPath = tvViewPath, Name = modelName, State = false, Chennel = 1, Volume = SetLevel.Low, CreateTime = DateTime.Now.ToLongTimeString() };
                     DeviceDb.Entry(tv).State = EntityState.Added;

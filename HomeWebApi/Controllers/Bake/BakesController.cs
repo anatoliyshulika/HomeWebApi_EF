@@ -10,13 +10,19 @@ namespace HomeWebApi
     public class BakesController : Controller
     {
         private DeviceContext db = new DeviceContext();
+        Bake bake;
+        List<Burner> burnerList;
+        List<Oven> ovenList;
         // GET: Bakes
-        public ActionResult BakeView()
+        public ActionResult BakeView(Bake Bake)
         {
-            List<Bake> lb = new List<Bake>();
-            lb = db.Bakes.ToList();
-            int id = lb.Count;
-            Bake bake = db.Bakes.Find(id);
+            int id = Bake.Id;
+            bake = db.Bakes.Find(id);
+            ovenList = bake.Ovens;
+            burnerList = bake.Burners;
+            bake = Bake;
+            bake.Ovens = ovenList;
+            bake.Burners = burnerList;
             return View(bake);
         }
     }

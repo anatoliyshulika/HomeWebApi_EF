@@ -7,7 +7,7 @@ using System.Web;
 
 namespace HomeWebApi
 {
-    public class DeviceContextInitializer : DropCreateDatabaseAlways<DeviceContext>
+    public class DeviceContextInitializer : DropCreateDatabaseIfModelChanges<DeviceContext>
     {
         private string viewPath = "~/Views/Lamps/LampView.cshtml";
         private string burnerViewPath = "~/Views/Burners/BurnerView.cshtml";
