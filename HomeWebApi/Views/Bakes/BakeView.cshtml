@@ -1,0 +1,20 @@
+﻿@model HomeWebApi.Bake
+@{
+    Layout = null;
+}
+<div class="_devices" id="@Model.Name">
+    <span class="_bakePanelName">@Model.Name</span>
+    <button type="button" class="_buttonDelete" onclick="BakeDelete('@Model.Id', '@Model.Name')">X</button>
+    @{
+        foreach (var burner in Model.Burners)
+        {
+            Html.RenderPartial(burner.ViewPath, burner);
+        }
+    }
+    @{
+        foreach (var oven in Model.Ovens)
+        {
+            Html.RenderPartial(oven.ViewPath, oven);
+        }
+    }
+</div>

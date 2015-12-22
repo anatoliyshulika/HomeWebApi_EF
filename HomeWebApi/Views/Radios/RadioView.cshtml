@@ -1,0 +1,52 @@
+﻿@model HomeWebApi.Radio
+@{
+    Layout = null;
+}
+<div class="_devices" id="@Model.Name">
+    <span class="_panelName">@Model.Name</span>
+    @{
+        if (Model.State)
+        {
+            <span class="_paneState">On</span>
+        }
+        else
+        {
+            <span class="_paneState">Off</span>
+        }
+    }
+    <button type="button" class="_buttonDelete" onclick="RadioDelete('@Model.Id', '@Model.Name')">X</button>
+    @{
+        if (Model.State)
+        {
+            <img src="~/Content/Picture/Radio.gif" class="_radioImage" />
+        }
+        else
+        {
+            <img src="~/Content/Picture/RadioOff.jpg" class="_radioImage" />
+        }
+    }
+    <button type="button" class="_radioButtonOnOff" onclick="RadioOnOff('@Model.Id', '@Model.Name')">OnOff</button>
+    <button type="button" class="_radioButtonVolume" onclick="RadioVolemeDown('@Model.Id', '@Model.Name')">V <</button>
+    <button type="button" class="_radioButtonVolume" onclick="RadioVolemeUp('@Model.Id', '@Model.Name')">> V</button>
+    @{
+        if (!Model.State)
+        {
+            <span class="_radioPanelVolume">Volume</span>
+        }
+        else
+        {
+            if (Model.Volume == SetLevel.Low)
+            {
+                <span class="_radioPanelVolume">Volume - Low</span>
+            }
+            else if (Model.Volume == SetLevel.Medium)
+            {
+                <span class="_radioPanelVolume">Volume - Medium</span>
+            }
+            else if (Model.Volume == SetLevel.Height)
+            {
+                <span class="_radioPanelVolume">Volume - Height</span>
+            }
+        }
+    }
+</div>

@@ -1,0 +1,51 @@
+﻿@model HomeWebApi.Frige
+@{
+    Layout = null;
+}
+<div class="_devices" id="@Model.Name">
+    <span class="_panelName">@Model.Name</span>
+    @{
+        if (Model.State)
+        {
+            <span class="_paneState">On</span>
+        }
+        else
+        {
+            <span class="_paneState">Off</span>
+        }
+    }
+    <button type="button" class="_buttonDelete" onclick="FrigeDelete('@Model.Id', '@Model.Name')">X</button>
+    <img src="~/Content/Picture/Frige.jpg" class="_frigeImage" />
+    <button type="button" class="_frigeButtonOnOff" onclick="FrigeOnOff('@Model.Id', '@Model.Name')">OnOff</button>
+    @{
+        if (Model.GetLampState(0))
+        {
+            <span class="_frigePanelLampState">Lamp On</span>
+        }
+        else
+        {
+            <span class="_frigePanelLampState">Lamp Off</span>
+        }
+    }
+    <button type="button" class="_frigeButtonOnOff" onclick="LampFrigeOnOff('@Model.Id', '@Model.Name')">OnOff</button>
+    <button type="button" class="_frigeButtonFrizingLevel" onclick="FrigeLevelDown('@Model.Id', '@Model.Name')"><</button>
+    <button type="button" class="_frigeButtonFrizingLevel" onclick="FrigeLevelUp('@Model.Id', '@Model.Name')">></button>
+    @{
+        if (!Model.State)
+        {
+            <span class="_frigePanelFrizingLevel">Frizing level</span>
+        }
+        else if (Model.State && Model.FrigeLevel == SetLevel.Low)
+        {
+            <span class="_frigePanelFrizingLevel">Frizing level - Low</span>
+        }
+        else if (Model.State && Model.FrigeLevel == SetLevel.Medium)
+        {
+            <span class="_frigePanelFrizingLevel">Frizing level - Medium</span>
+        }
+        else if (Model.State && Model.FrigeLevel == SetLevel.Height)
+        {
+            <span class="_frigePanelFrizingLevel">Frizing level - Height</span>
+        }
+    }
+</div>

@@ -1,0 +1,29 @@
+﻿@model HomeWebApi.Lamp
+@{
+    Layout = null;
+}
+<div class="_devices" id=@Model.Name>
+    <span class="_panelName">@Model.Name</span>
+    @{
+        if (Model.State)
+        {
+            <span class="_paneState">On</span>
+        }
+        else
+        {
+            <span class="_paneState">Off</span>
+        }
+    }
+    <button type="button" class="_buttonDelete" onclick="LampDelete('@Model.Id', '@Model.Name')">X</button>
+    @{
+        if (Model.State)
+        {
+            <img src="~/Content/Picture/LampOn.jpg" class="_lampImage" />
+        }
+        else
+        {
+            <img src="~/Content/Picture/LampOff.jpg" class="_lampImage" />
+        }
+    }
+    <button type="button" class="_lampButtonOnOff" onclick="LampOnOff('@Model.Id', '@Model.Name')">OnOff</button>
+</div>

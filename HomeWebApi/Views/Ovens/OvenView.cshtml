@@ -1,0 +1,23 @@
+﻿@model HomeWebApi.Oven
+<div class="_oven" id="@Model.Name">
+    @{
+        if (Model.State)
+        {
+            <span class="_panelOvenState">Oven On</span>
+        }
+        else
+        {
+            <span class="_panelOvenState">Oven Off</span>
+        }
+        if (Model.GetLampState(0))
+        {
+            <span class="_panelOvenLampState">Lamp On</span>
+        }
+        else
+        {
+            <span class="_panelOvenLampState">Lamp Off</span>
+        }
+    }
+    <button type="button" class="_ovenButtonOnOff" onclick="OvenOnOff('@Model.Id', '@Model.Name')">OnOff</button>
+    <button type="button" class="_ovenButtonOnOff" onclick="LampOvenOnOff('@Model.Id', '@Model.Name')">OnOff</button>
+</div>
