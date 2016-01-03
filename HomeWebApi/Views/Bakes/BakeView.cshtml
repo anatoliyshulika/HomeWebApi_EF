@@ -12,9 +12,6 @@
         }
     }
     @{
-        foreach (var oven in Model.Ovens)
-        {
-            Html.RenderPartial(oven.ViewPath, oven);
-        }
+        Html.RenderPartial(Model.Oven.ViewPath, Model.Oven);
     }
 </div>

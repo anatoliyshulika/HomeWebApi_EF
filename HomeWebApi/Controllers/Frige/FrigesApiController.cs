@@ -1,10 +1,6 @@
 ﻿using HomeWebApi.Models;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace HomeWebApi
@@ -49,10 +45,10 @@ namespace HomeWebApi
             Frige frige = db.Friges.Find(id);
             if (frige != null)
             {
-                frige.LampOnOff(0);
+                frige.LampOnOff();
                 db.Entry(frige).State = EntityState.Modified;
                 db.SaveChanges();
-                if (frige.GetLampState(0))
+                if (frige.GetLampState())
                 {
                     return 1;
                 }
@@ -128,10 +124,6 @@ namespace HomeWebApi
             Frige frige = db.Friges.Find(id);
             if (frige != null)
             {
-                List<Lamp> ll = new List<Lamp>();
-                ll = frige.Lamps.ToList();
-                db.Lamps.Remove(ll[0]);
-                db.SaveChanges();
                 db.Friges.Remove(frige);
                 db.SaveChanges();
                 return 1;

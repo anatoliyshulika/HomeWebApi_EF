@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Web;
 
 namespace HomeWebApi
 {
@@ -19,29 +17,23 @@ namespace HomeWebApi
         protected override void Seed(DeviceContext context)
         {
             List<Burner> burnerList = new List<Burner>();
-            List<Lamp> lampOvenList = new List<Lamp>();
-            List<Lamp> lampFrigeList = new List<Lamp>();
-            List<Oven> ovenList = new List<Oven>();
-            context.Lamps.Add(new Lamp { ViewPath = viewPath, Name = "Lamp1", State = false, CreateTime = DateTime.Now.ToLongTimeString() });
+            context.Lamps.Add(new Lamp { ViewPath = viewPath, Name = "Lamp1", State = false, CreateTime = DateTime.Now.ToLongDateString() });
             Burner burner1 = new Burner { ViewPath = burnerViewPath, Name = "Bake1" + "1", BurnerLevel = SetLevel.Low, State = false };
             Burner burner2 = new Burner { ViewPath = burnerViewPath, Name = "Bake1" + "2", BurnerLevel = SetLevel.Low, State = false };
             burnerList.Add(burner1);
             burnerList.Add(burner2);
             Lamp lampOven = new Lamp { ViewPath = "no", Name = "LampOven1", State = false };
-            lampOvenList.Add(lampOven);
-            Oven oven = new Oven { ViewPath = ovenViewPath, Name = "Bake1" + "Oven1", State = false, Lamps = lampOvenList };
-            ovenList.Add(oven);
+            Oven oven = new Oven { ViewPath = ovenViewPath, Name = "Bake1" + "Oven1", State = false, Lamp = lampOven };
             context.Lamps.Add(lampOven);
             context.Burners.Add(burner1);
             context.Burners.Add(burner2);
             context.Ovens.Add(oven);
-            context.Bakes.Add(new Bake { ViewPath = bakeViewPath, Name = "Bake1", Burners = burnerList, Ovens = ovenList, CreateTime = DateTime.Now.ToLongTimeString() });
+            context.Bakes.Add(new Bake { ViewPath = bakeViewPath, Name = "Bake1", Burners = burnerList, Oven = oven, CreateTime = DateTime.Now.ToLongDateString() });
             Lamp lampFrige = new Lamp { ViewPath = "no", Name = "LampFrige", State = false };
-            lampFrigeList.Add(lampFrige);
             context.Lamps.Add(lampFrige);
-            context.Friges.Add(new Frige { ViewPath = frigeViewPath, Name = "Frige1", State = false, FrigeLevel = SetLevel.Low, Lamps = lampFrigeList, CreateTime = DateTime.Now.ToLongTimeString() });
-            context.TVs.Add(new TV { ViewPath = tvViewPath, Name = "TV1", State = false, Chennel = 1, Volume = SetLevel.Low, CreateTime = DateTime.Now.ToLongTimeString() });
-            context.Radios.Add(new Radio { ViewPath = radioViewPath, Name = "Radio1", State = false, Volume = SetLevel.Low, CreateTime = DateTime.Now.ToLongTimeString() });
+            context.Friges.Add(new Frige { ViewPath = frigeViewPath, Name = "Frige1", State = false, FrigeLevel = SetLevel.Low, Lamp = lampFrige, CreateTime = DateTime.Now.ToLongDateString() });
+            context.TVs.Add(new TV { ViewPath = tvViewPath, Name = "TV1", State = false, Chennel = 1, Volume = SetLevel.Low, CreateTime = DateTime.Now.ToLongDateString() });
+            context.Radios.Add(new Radio { ViewPath = radioViewPath, Name = "Radio1", State = false, Volume = SetLevel.Low, CreateTime = DateTime.Now.ToLongDateString() });
             context.SaveChanges();
         }
     }

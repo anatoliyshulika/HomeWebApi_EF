@@ -1,10 +1,6 @@
 ﻿using HomeWebApi.Models;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace HomeWebApi
@@ -13,7 +9,7 @@ namespace HomeWebApi
     {
         private DeviceContext db = new DeviceContext();
         // PUT: api/TVsApi
-        public int PutOnOff(string Id)
+        public byte PutOnOff(string Id)
         {
             int id = Convert.ToInt32(Id);
             TV tv = db.TVs.Find(id);
@@ -22,45 +18,9 @@ namespace HomeWebApi
                 tv.OnOff();
                 db.Entry(tv).State = EntityState.Modified;
                 db.SaveChanges();
-                if (tv.State && tv.Chennel == 1)
+                if (tv.State)
                 {
-                    return 1;
-                }
-                else if (tv.State && tv.Chennel == 2)
-                {
-                    return 2;
-                }
-                else if (tv.State && tv.Chennel == 3)
-                {
-                    return 3;
-                }
-                else if (tv.State && tv.Chennel == 4)
-                {
-                    return 4;
-                }
-                else if (tv.State && tv.Chennel == 5)
-                {
-                    return 5;
-                }
-                else if (tv.State && tv.Chennel == 6)
-                {
-                    return 6;
-                }
-                else if (tv.State && tv.Chennel == 7)
-                {
-                    return 7;
-                }
-                else if (tv.State && tv.Chennel == 8)
-                {
-                    return 8;
-                }
-                else if (tv.State && tv.Chennel == 9)
-                {
-                    return 9;
-                }
-                else if (tv.State && tv.Chennel == 10)
-                {
-                    return 10;
+                    return tv.Chennel;
                 }
                 else
                 {

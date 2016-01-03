@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
+﻿
 namespace HomeWebApi
 {
     public class Burner : Devices, ISwitchbl, ISetLevel
     {
         public bool State { get; set; }
         public SetLevel BurnerLevel { get; set; }
-        public virtual Bake Bake { get; set; }
-        public int? BakeId { get; set; }
+        public int BakeId { get; set; }
         public void OnOff()
         {
             if (State)

@@ -1,10 +1,6 @@
 ﻿using HomeWebApi.Models;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace HomeWebApi
@@ -41,10 +37,10 @@ namespace HomeWebApi
             Oven oven = db.Ovens.Find(id);
             if (oven != null)
             {
-                oven.LampOnOff(0);
+                oven.LampOnOff();
                 db.Entry(oven).State = EntityState.Modified;
                 db.SaveChanges();
-                if (oven.GetLampState(0))
+                if (oven.GetLampState())
                 {
                     return 1;
                 }

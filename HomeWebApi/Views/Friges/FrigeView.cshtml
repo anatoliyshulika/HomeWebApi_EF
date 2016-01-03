@@ -18,7 +18,7 @@
     <img src="~/Content/Picture/Frige.jpg" class="_frigeImage" />
     <button type="button" class="_frigeButtonOnOff" onclick="FrigeOnOff('@Model.Id', '@Model.Name')">OnOff</button>
     @{
-        if (Model.GetLampState(0))
+        if (Model.GetLampState())
         {
             <span class="_frigePanelLampState">Lamp On</span>
         }
