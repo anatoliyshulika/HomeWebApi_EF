@@ -6,7 +6,6 @@ namespace HomeWebApi
         public bool State { get; set; }
         public int? OvenId { get; set; }
         public int? FrigeId { get; set; }
-        public int? BakeId { get; set; }
         public void OnOff()
         {
             if (State)

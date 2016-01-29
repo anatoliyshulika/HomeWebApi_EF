@@ -7,49 +7,54 @@ namespace HomeWebApi
 {
     public class OvensApiController : ApiController
     {
-        private DeviceContext db = new DeviceContext();
         // PUT: api/OvensApi
         public int PutOvenOnOff(string Id)
         {
-            int id = Convert.ToInt32(Id);
-            Oven oven = db.Ovens.Find(id);
-            if (oven != null)
+            using (DeviceContext db = new DeviceContext())
             {
-                oven.OnOff();
-                db.Entry(oven).State = EntityState.Modified;
-                db.SaveChanges();
-                if (oven.State)
+                int id = Convert.ToInt32(Id);
+                Oven oven = db.Ovens.Find(id);
+                if (oven != null)
                 {
-                    return 1;
+                    oven.OnOff();
+                    db.Entry(oven).State = EntityState.Modified;
+                    db.SaveChanges();
+                    if (oven.State)
+                    {
+                        return 1;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
                 }
-                else
-                {
-                    return 0;
-                }
+                return 2;
             }
-            return 2;
         }
         // PUT: api/OvensApi
         [Route("api/OvensApi/PutLampOvenOnOff/{id}")]
         public int PutLampOvenOnOff(string Id)
         {
-            int id = Convert.ToInt32(Id);
-            Oven oven = db.Ovens.Find(id);
-            if (oven != null)
+            using (DeviceContext db = new DeviceContext())
             {
-                oven.LampOnOff();
-                db.Entry(oven).State = EntityState.Modified;
-                db.SaveChanges();
-                if (oven.GetLampState())
+                int id = Convert.ToInt32(Id);
+                Oven oven = db.Ovens.Find(id);
+                if (oven != null)
                 {
-                    return 1;
+                    oven.LampOnOff();
+                    db.Entry(oven).State = EntityState.Modified;
+                    db.SaveChanges();
+                    if (oven.GetLampState())
+                    {
+                        return 1;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
                 }
-                else
-                {
-                    return 0;
-                }
+                return 2;
             }
-            return 2;
         }
     }
 }

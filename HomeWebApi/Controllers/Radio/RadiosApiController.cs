@@ -7,99 +7,109 @@ namespace HomeWebApi
 {
     public class RadiosApiController : ApiController
     {
-        private DeviceContext db = new DeviceContext();
-
         // PUT: api/RadiosApi
         public int PutOnOff(string Id)
         {
-            int id = Convert.ToInt32(Id);
-            Radio radio = db.Radios.Find(id);
-            if (radio != null)
+            using (DeviceContext db = new DeviceContext())
             {
-                radio.OnOff();
-                db.Entry(radio).State = EntityState.Modified;
-                db.SaveChanges();
-                if (radio.State)
+                int id = Convert.ToInt32(Id);
+                Radio radio = db.Radios.Find(id);
+                if (radio != null)
                 {
-                    return 1;
+                    radio.OnOff();
+                    db.Entry(radio).State = EntityState.Modified;
+                    db.SaveChanges();
+                    if (radio.State)
+                    {
+                        return 1;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
                 }
-                else
-                {
-                    return 0;
-                }
+                return 2;
             }
-            return 2;
         }
         // PUT: api/RadiosApi/PutVolumeDown/{id}
         [Route("api/RadiosApi/PutVolumeDown/{id}")]
         public int PutVolumeDown(string Id)
         {
-            int id = Convert.ToInt32(Id);
-            Radio radio = db.Radios.Find(id);
-            if (radio != null)
+            using (DeviceContext db = new DeviceContext())
             {
-                if (radio.State)
+                int id = Convert.ToInt32(Id);
+                Radio radio = db.Radios.Find(id);
+                if (radio != null)
                 {
-                    radio.VolumeDown();
-                    db.Entry(radio).State = EntityState.Modified;
-                    db.SaveChanges();
-                    if (radio.State && radio.Volume == SetLevel.Low)
+                    if (radio.State)
                     {
-                        return 1;
-                    }
-                    else if (radio.State && radio.Volume == SetLevel.Medium)
-                    {
-                        return 2;
-                    }
-                    else if (radio.State && radio.Volume == SetLevel.Height)
-                    {
-                        return 3;
+                        radio.VolumeDown();
+                        db.Entry(radio).State = EntityState.Modified;
+                        db.SaveChanges();
+                        if (radio.State && radio.Volume == SetLevel.Low)
+                        {
+                            return 1;
+                        }
+                        else if (radio.State && radio.Volume == SetLevel.Medium)
+                        {
+                            return 2;
+                        }
+                        else if (radio.State && radio.Volume == SetLevel.Height)
+                        {
+                            return 3;
+                        }
                     }
                 }
+                return 4;
             }
-            return 4;
         }
         // PUT: api/RadiosApi/PutVolumeUp/{id}
         [Route("api/RadiosApi/PutVolumeUp/{id}")]
         public int PutVolumeUp(string Id)
         {
-            int id = Convert.ToInt32(Id);
-            Radio radio = db.Radios.Find(id);
-            if (radio != null)
+            using (DeviceContext db = new DeviceContext())
             {
-                if (radio.State)
+                int id = Convert.ToInt32(Id);
+                Radio radio = db.Radios.Find(id);
+                if (radio != null)
                 {
-                    radio.VolumeUp();
-                    db.Entry(radio).State = EntityState.Modified;
-                    db.SaveChanges();
-                    if (radio.State && radio.Volume == SetLevel.Low)
+                    if (radio.State)
                     {
-                        return 1;
-                    }
-                    else if (radio.State && radio.Volume == SetLevel.Medium)
-                    {
-                        return 2;
-                    }
-                    else if (radio.State && radio.Volume == SetLevel.Height)
-                    {
-                        return 3;
+                        radio.VolumeUp();
+                        db.Entry(radio).State = EntityState.Modified;
+                        db.SaveChanges();
+                        if (radio.State && radio.Volume == SetLevel.Low)
+                        {
+                            return 1;
+                        }
+                        else if (radio.State && radio.Volume == SetLevel.Medium)
+                        {
+                            return 2;
+                        }
+                        else if (radio.State && radio.Volume == SetLevel.Height)
+                        {
+                            return 3;
+                        }
                     }
                 }
+                return 4;
             }
-            return 4;
         }
         // DELETE: api/RadiosApi/5
         public int DeleteRadio(string Id)
         {
-            int id = Convert.ToInt32(Id);
-            Radio radio = db.Radios.Find(id);
-            if (radio != null)
+            using (DeviceContext db = new DeviceContext())
             {
-                db.Radios.Remove(radio);
-                db.SaveChanges();
-                return 1;
+                int id = Convert.ToInt32(Id);
+                Radio radio = db.Radios.Find(id);
+                if (radio != null)
+                {
+                    db.Radios.Remove(radio);
+                    db.SaveChanges();
+                    return 1;
+                }
+                return 0;
             }
-            return 0;
         }
     }
 }
